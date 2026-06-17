@@ -18,8 +18,7 @@ jobs:
         run: npm install -g pake-cli
 
       - name: Build app
-        run: pake https://www.pw.live/study-v2/study --name PWStudy --width 1280 --height 800 --force-internal-navigation --wasm --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" --debug
-
+        run: pake https://www.pw.live/study-v2/study --name PWStudy --width 1280 --height 800 --force-internal-navigation --new-window --wasm
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
