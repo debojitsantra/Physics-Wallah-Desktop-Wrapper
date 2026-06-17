@@ -1,6 +1,6 @@
 # PW
 
-A distraction-free desktop wrapper for [Physics Wallah](https://www.pw.live) study material, built with [Pake](https://github.com/tw93/Pake). No browser tabs, no other websites, no excuse to "just quickly check something else" mid-lecture.
+A distraction-free desktop wrapper for [Physics Wallah](https://www.pw.live), built with [Pake](https://github.com/tw93/Pake). No browser tabs, no other websites, no excuse to "just quickly check something else" mid-lecture.
 
 > **Disclaimer**: This is an unofficial, community-built tool. It is not affiliated with, endorsed by, or sponsored by Physics Wallah. All PW content, trademarks, and branding belong to their respective owners. This project only packages the existing PW website into a standalone window — it does not modify, host, or redistribute any of PW's content.
 
