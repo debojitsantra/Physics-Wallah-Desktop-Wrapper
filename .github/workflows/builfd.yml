@@ -1,0 +1,29 @@
+name: Build PW App
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install Pake CLI
+        run: npm install -g pake-cli
+
+      - name: Build app
+        run: pake https://www.pw.live --name PWStudy --width 1280 --height 800 --internal-url-regex "pw\.live"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PWStudy-windows
+          path: |
+            *.exe
+            *.msi
