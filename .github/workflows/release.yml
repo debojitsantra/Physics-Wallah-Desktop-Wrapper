@@ -34,14 +34,84 @@ jobs:
             *.exe
             *.msi
 
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install Pake CLI
+        run: npm install -g pake-cli
+
+      - name: Build app
+        run: pake https://www.pw.live/study-v2/study --name PW --width 1280 --height 800 --force-internal-navigation --new-window --wasm
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PW-macos
+          path: |
+            *.dmg
+
+  build-linux:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install Linux build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev libfuse2
+
+      - name: Install Pake CLI
+        run: npm install -g pake-cli
+
+      - name: Build app
+        run: pake https://www.pw.live/study-v2/study --name PW --width 1280 --height 800 --force-internal-navigation --new-window --wasm
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PW-linux
+          path: |
+            *.deb
+            *.AppImage
+
   release:
-    needs: [build-windows]
+    needs: [build-windows, build-macos, build-linux]
     runs-on: ubuntu-latest
     steps:
       - name: Download Windows Artifact
         uses: actions/download-artifact@v4
         with:
           name: PW-windows
+          path: .
+
+      - name: Download macOS Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: PW-macos
+          path: .
+
+      - name: Download Linux Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: PW-linux
           path: .
 
       - name: Create GitHub Release
@@ -52,5 +122,8 @@ jobs:
           files: |
             *.exe
             *.msi
+            *.dmg
+            *.deb
+            *.AppImage
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
