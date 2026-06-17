@@ -23,7 +23,7 @@ It's built on [Pake](https://github.com/tw93/Pake), an open-source Rust/Tauri to
 
 See the [Releases](../../releases) page for pre-built installers:
 
-- **Windows**: `.exe` or `.msi`
+- **Windows**: `.msi`
 - **macOS**: `.dmg`
 - **Linux**: `.deb` or `.AppImage`
 
@@ -39,7 +39,7 @@ You don't need Rust, Node, or any local toolchain installed. This repo builds th
 2. Go to the **Actions** tab on your copy of the repo.
 3. Select the **Build PW App** workflow.
 4. Click **Run workflow**.
-5. Wait 5–10 minutes for the first build (subsequent builds are faster).
+5. Wait 10–15 minutes for the first build.
 6. Check the **Releases** page — `.exe`/`.msi`, `.dmg`, `.deb`, and `.AppImage` will all be attached automatically once the workflow finishes, no manual artifact download needed.
 
 ### The build command
